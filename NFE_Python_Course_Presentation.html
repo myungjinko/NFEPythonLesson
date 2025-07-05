@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFE Python Programming Course</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            display: none;
+            padding: 60px;
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .slide-subtitle {
+            font-size: 2rem;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .slide-content {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #34495e;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-content ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .slide-content li {
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: #f39c12;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(52, 73, 94, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            z-index: 1000;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title-slide .slide-title {
+            color: white;
+            font-size: 4rem;
+            margin-bottom: 30px;
+        }
+
+        .title-slide .slide-subtitle {
+            color: #ecf0f1;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+        }
+
+        .title-slide .slide-content {
+            color: #ecf0f1;
+            font-size: 1.6rem;
+            text-align: left;
+        }
+
+        .conclusion-slide {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+
+        .conclusion-slide .slide-title,
+        .conclusion-slide .slide-subtitle {
+            color: white;
+        }
+
+        .conclusion-slide .slide-content {
+            color: #ecf0f1;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .slide-content {
+                font-size: 1.2rem;
+            }
+            
+            .navigation {
+                bottom: 20px;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <div class="slide-title">NFE Python Programming Course</div>
+            <div class="slide-subtitle">A Complete Introduction to Python Programming</div>
+            <div class="slide-content">
+                <p>Welcome to the NFE Python Programming Course!</p>
+                <br>
+                <p>This course will teach you:</p>
+                <ul>
+                    <li>What coding is and why it matters</li>
+                    <li>How to write your first Python program</li>
+                    <li>Variables, functions, loops, and more</li>
+                    <li>How to build a complete Rock Paper Scissors game</li>
+                </ul>
+                <br>
+                <p>Let's begin our coding journey!</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is Coding -->
+        <div class="slide">
+            <div class="slide-title">Chapter 1: What is Coding?</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand what coding is and why it's important</li>
+                    <li>Learn how coding relates to everyday life</li>
+                    <li>Discover the basic concepts behind programming</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🤔</span> <strong>What is Coding?</strong></p>
+                <p>Coding (also called programming) is the process of writing instructions for a computer to follow. Think of it like writing a recipe for a computer!</p>
+                <br>
+                <p><span class="emoji">💻</span> <strong>Why Do We Need Coding?</strong></p>
+                <ul>
+                    <li><strong>Automation</strong> - Do repetitive tasks automatically</li>
+                    <li><strong>Problem Solving</strong> - Solve complex problems quickly</li>
+                    <li><strong>Creating New Things</strong> - Build apps, websites, games</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Recipe vs Code -->
+        <div class="slide">
+            <div class="slide-title">Real-World Analogy: Recipe vs Code</div>
+            <div class="slide-content">
+                <p><strong>Making a Sandwich:</strong></p>
+                <br>
+                <p><strong>Recipe (Human Instructions):</strong></p>
+                <ol>
+                    <li>Take two slices of bread</li>
+                    <li>Spread mayonnaise on one slice</li>
+                    <li>Add lettuce, tomato, and cheese</li>
+                    <li>Put the other slice on top</li>
+                    <li>Cut diagonally</li>
+                </ol>
+                <br>
+                <p><strong>Code (Computer Instructions):</strong></p>
+                <div class="code-block">
+def make_sandwich():
+    bread1 = get_bread_slice()
+    bread2 = get_bread_slice()
+    spread_mayonnaise(bread1)
+    add_lettuce(bread1)
+    add_tomato(bread1)
+    add_cheese(bread1)
+    place_bread(bread2, bread1)
+    cut_sandwich_diagonally()
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Coding in Everyday Life -->
+        <div class="slide">
+            <div class="slide-title">Coding in Everyday Life</div>
+            <div class="slide-content">
+                <p>You interact with code every day:</p>
+                <br>
+                <p><span class="emoji">📱</span> <strong>Smartphones:</strong> Every app is made with code</p>
+                <p><span class="emoji">🌐</span> <strong>Websites:</strong> Everything online is created with code</p>
+                <p><span class="emoji">🚗</span> <strong>Cars:</strong> Modern cars have computers running code</p>
+                <p><span class="emoji">🏠</span> <strong>Appliances:</strong> Microwave, washing machine, coffee maker</p>
+                <br>
+                <p><span class="emoji">🎮</span> <strong>What Can You Build with Code?</strong></p>
+                <ul>
+                    <li><strong>Games:</strong> Minecraft, Fortnite, mobile games</li>
+                    <li><strong>Apps:</strong> Instagram, TikTok, WhatsApp</li>
+                    <li><strong>Websites:</strong> Google, Facebook, Amazon</li>
+                    <li><strong>Tools:</strong> Calculators, calendars, weather apps</li>
+                    <li><strong>Art:</strong> Digital art, music, animations</li>
+                    <li><strong>Science:</strong> Data analysis, simulations, research tools</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Programming Languages -->
+        <div class="slide">
+            <div class="slide-title">Chapter 2: Programming Languages</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand what programming languages are</li>
+                    <li>Learn about different types of languages</li>
+                    <li>Discover why we have so many languages</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🤔</span> <strong>What is a Programming Language?</strong></p>
+                <p>A programming language is a set of rules and instructions that humans use to communicate with computers.</p>
+                <br>
+                <p><span class="emoji">🌍</span> <strong>Types of Programming Languages:</strong></p>
+                <ul>
+                    <li><strong>High-Level Languages:</strong> Python, JavaScript, Java</li>
+                    <li><strong>Low-Level Languages:</strong> Assembly, Machine Code</li>
+                    <li><strong>Specialized Languages:</strong> SQL, HTML, CSS</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🐍</span> <strong>Why Python?</strong></p>
+                <ul>
+                    <li>Easy to read and write</li>
+                    <li>Great for beginners</li>
+                    <li>Powerful and versatile</li>
+                    <li>Large community and resources</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: Why Python -->
+        <div class="slide">
+            <div class="slide-title">Chapter 3: Why Python?</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand why Python is a great first language</li>
+                    <li>Learn about Python's features and benefits</li>
+                    <li>Discover what you can build with Python</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🐍</span> <strong>Python's Advantages:</strong></p>
+                <ul>
+                    <li><span class="highlight">✅ Easy to Read:</span> Looks almost like English</li>
+                    <li><span class="highlight">✅ Beginner-Friendly:</span> Perfect for learning</li>
+                    <li><span class="highlight">✅ Versatile:</span> Web, data, AI, games, and more</li>
+                    <li><span class="highlight">✅ Large Community:</span> Lots of help available</li>
+                    <li><span class="highlight">✅ Free:</span> No cost to use or learn</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🚀</span> <strong>What Can You Build with Python?</strong></p>
+                <ul>
+                    <li>Web applications</li>
+                    <li>Data analysis tools</li>
+                    <li>Artificial Intelligence</li>
+                    <li>Games and graphics</li>
+                    <li>Automation scripts</li>
+                    <li>Scientific computing</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: How to Build -->
+        <div class="slide">
+            <div class="slide-title">Chapter 4: How to Build</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Learn the software development process</li>
+                    <li>Understand how to plan and build programs</li>
+                    <li>Discover best practices for coding</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🔨</span> <strong>The Building Process:</strong></p>
+                <ol>
+                    <li><strong>Planning:</strong> What do you want to build?</li>
+                    <li><strong>Design:</strong> How will it work?</li>
+                    <li><strong>Coding:</strong> Write the actual code</li>
+                    <li><strong>Testing:</strong> Make sure it works correctly</li>
+                    <li><strong>Debugging:</strong> Fix any problems</li>
+                    <li><strong>Deployment:</strong> Share your creation</li>
+                </ol>
+                <br>
+                <p><span class="emoji">💡</span> <strong>Best Practices:</strong></p>
+                <ul>
+                    <li>Start small and build up</li>
+                    <li>Test frequently</li>
+                    <li>Keep your code organized</li>
+                    <li>Document your work</li>
+                    <li>Learn from mistakes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: First Program -->
+        <div class="slide">
+            <div class="slide-title">Chapter 5: Your First Program</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Write your first Python program</li>
+                    <li>Learn about the print() function</li>
+                    <li>Understand basic program structure</li>
+                </ul>
+                <br>
+                <p><span class="emoji">👋</span> <strong>Hello World Program:</strong></p>
+                <div class="code-block">
+print('Hello, World!')
+                </div>
+                <br>
+                <p><span class="emoji">📝</span> <strong>Program Structure:</strong></p>
+                <ul>
+                    <li>Every program has a beginning and end</li>
+                    <li>Instructions are executed in order</li>
+                    <li>Python reads code from top to bottom</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🔧</span> <strong>Your First Steps:</strong></p>
+                <ol>
+                    <li>Open a text editor</li>
+                    <li>Write your code</li>
+                    <li>Save with .py extension</li>
+                    <li>Run the program</li>
+                    <li>See the output!</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Slide 9: Variables -->
+        <div class="slide">
+            <div class="slide-title">Chapter 6: Variables</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand what variables are</li>
+                    <li>Learn how to create and use variables</li>
+                    <li>Discover different data types</li>
+                </ul>
+                <br>
+                <p><span class="emoji">📦</span> <strong>What are Variables?</strong></p>
+                <p>Variables are like containers that store information in your program.</p>
+                <br>
+                <p><span class="emoji">🔤</span> <strong>Creating Variables:</strong></p>
+                <div class="code-block">
+name = 'Alice'
+age = 25
+height = 5.6
+is_student = True
+                </div>
+                <br>
+                <p><span class="emoji">📊</span> <strong>Data Types:</strong></p>
+                <ul>
+                    <li><strong>Strings:</strong> Text (like 'Hello')</li>
+                    <li><strong>Integers:</strong> Whole numbers (like 42)</li>
+                    <li><strong>Floats:</strong> Decimal numbers (like 3.14)</li>
+                    <li><strong>Booleans:</strong> True or False</li>
+                </ul>
+                <br>
+                <p><span class="emoji">💡</span> <strong>Variable Rules:</strong></p>
+                <ul>
+                    <li>Use descriptive names</li>
+                    <li>Start with letters or underscore</li>
+                    <li>No spaces (use underscores)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Code Blocks -->
+        <div class="slide">
+            <div class="slide-title">Chapter 7: Code Blocks</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand how code is organized</li>
+                    <li>Learn about indentation and structure</li>
+                    <li>Discover how to group related code</li>
+                </ul>
+                <br>
+                <p><span class="emoji">📦</span> <strong>What are Code Blocks?</strong></p>
+                <p>Code blocks are groups of related instructions that work together.</p>
+                <br>
+                <p><span class="emoji">🔤</span> <strong>Indentation:</strong></p>
+                <p>Python uses indentation (spaces) to show which code belongs together:</p>
+                <div class="code-block">
+if temperature > 80:
+    print('It is hot!')
+    print('Wear sunscreen')
+print('This is not in the if block')
+                </div>
+                <br>
+                <p><span class="emoji">📋</span> <strong>Block Types:</strong></p>
+                <ul>
+                    <li>Function blocks</li>
+                    <li>Conditional blocks (if/else)</li>
+                    <li>Loop blocks</li>
+                    <li>Class blocks</li>
+                </ul>
+                <br>
+                <p><span class="emoji">⚠️</span> <strong>Important:</strong></p>
+                <ul>
+                    <li>Use consistent indentation</li>
+                    <li>Usually 4 spaces per level</li>
+                    <li>Don't mix tabs and spaces</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 11: Functions -->
+        <div class="slide">
+            <div class="slide-title">Chapter 8: Functions</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand what functions are</li>
+                    <li>Learn how to create and use functions</li>
+                    <li>Discover function parameters and return values</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🔧</span> <strong>What are Functions?</strong></p>
+                <p>Functions are reusable blocks of code that perform specific tasks.</p>
+                <br>
+                <p><span class="emoji">📝</span> <strong>Creating Functions:</strong></p>
+                <div class="code-block">
+def greet(name):
+    print(f'Hello, {name}!')
+    return 'Greeting sent'
+
+# Using the function
+result = greet('Alice')
+                </div>
+                <br>
+                <p><span class="emoji">🎯</span> <strong>Function Parts:</strong></p>
+                <ul>
+                    <li><strong>def:</strong> Keyword to define a function</li>
+                    <li><strong>Function name:</strong> What you call it</li>
+                    <li><strong>Parameters:</strong> Information the function needs</li>
+                    <li><strong>Body:</strong> The code that runs</li>
+                    <li><strong>Return:</strong> What the function gives back</li>
+                </ul>
+                <br>
+                <p><span class="emoji">💡</span> <strong>Why Use Functions?</strong></p>
+                <ul>
+                    <li>Reuse code</li>
+                    <li>Organize your program</li>
+                    <li>Make code easier to understand</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 12: If/Else -->
+        <div class="slide">
+            <div class="slide-title">Chapter 9: If/Else Statements</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand conditional logic</li>
+                    <li>Learn how to make decisions in code</li>
+                    <li>Discover comparison operators</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🤔</span> <strong>What are If/Else Statements?</strong></p>
+                <p>If/else statements let your program make decisions based on conditions.</p>
+                <br>
+                <p><span class="emoji">📝</span> <strong>Basic Structure:</strong></p>
+                <div class="code-block">
+if condition:
+    # do this if condition is True
+elif another_condition:
+    # do this if another_condition is True
+else:
+    # do this if no conditions are True
+                </div>
+                <br>
+                <p><span class="emoji">🔍</span> <strong>Comparison Operators:</strong></p>
+                <ul>
+                    <li><strong>==</strong> (equal to)</li>
+                    <li><strong>!=</strong> (not equal to)</li>
+                    <li><strong>></strong> (greater than)</li>
+                    <li><strong><</strong> (less than)</li>
+                    <li><strong>>=</strong> (greater than or equal)</li>
+                    <li><strong><=</strong> (less than or equal)</li>
+                </ul>
+                <br>
+                <p><span class="emoji">💡</span> <strong>Example:</strong></p>
+                <div class="code-block">
+age = 18
+if age >= 18:
+    print('You are an adult')
+else:
+    print('You are a minor')
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Loops -->
+        <div class="slide">
+            <div class="slide-title">Chapter 10: Loops</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand what loops are</li>
+                    <li>Learn about for and while loops</li>
+                    <li>Discover how to repeat code efficiently</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🔄</span> <strong>What are Loops?</strong></p>
+                <p>Loops let you repeat code multiple times without writing it over and over.</p>
+                <br>
+                <p><span class="emoji">📝</span> <strong>For Loops:</strong></p>
+                <div class="code-block">
+for item in [1, 2, 3, 4, 5]:
+    print(item)
+
+for i in range(5):
+    print(f'Count: {i}')
+                </div>
+                <br>
+                <p><span class="emoji">⏰</span> <strong>While Loops:</strong></p>
+                <div class="code-block">
+count = 0
+while count < 5:
+    print(f'Count: {count}')
+    count += 1
+                </div>
+                <br>
+                <p><span class="emoji">🎯</span> <strong>Loop Control:</strong></p>
+                <ul>
+                    <li><strong>break:</strong> Stop the loop early</li>
+                    <li><strong>continue:</strong> Skip to next iteration</li>
+                    <li><strong>range():</strong> Generate sequences of numbers</li>
+                </ul>
+                <br>
+                <p><span class="emoji">💡</span> <strong>When to Use:</strong></p>
+                <ul>
+                    <li><strong>For loops:</strong> When you know how many times</li>
+                    <li><strong>While loops:</strong> When you don't know how many times</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 14: RPS Rules -->
+        <div class="slide">
+            <div class="slide-title">Chapter 11: Rock Paper Scissors Rules</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Understand the game rules</li>
+                    <li>Plan the program structure</li>
+                    <li>Design the game logic</li>
+                </ul>
+                <br>
+                <p><span class="emoji">✂️</span> <strong>Game Rules:</strong></p>
+                <ul>
+                    <li>Rock crushes Scissors</li>
+                    <li>Scissors cuts Paper</li>
+                    <li>Paper covers Rock</li>
+                    <li>Same choice = Tie</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🎮</span> <strong>Game Flow:</strong></p>
+                <ol>
+                    <li>Computer chooses randomly</li>
+                    <li>Player makes a choice</li>
+                    <li>Compare choices</li>
+                    <li>Determine winner</li>
+                    <li>Show result</li>
+                    <li>Ask to play again</li>
+                </ol>
+                <br>
+                <p><span class="emoji">📋</span> <strong>Program Structure:</strong></p>
+                <ul>
+                    <li>Get computer's choice</li>
+                    <li>Get player's choice</li>
+                    <li>Compare choices</li>
+                    <li>Display result</li>
+                    <li>Handle invalid input</li>
+                    <li>Keep score (optional)</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🔧</span> <strong>Technical Requirements:</strong></p>
+                <ul>
+                    <li>Random number generation</li>
+                    <li>User input handling</li>
+                    <li>Conditional logic</li>
+                    <li>Loops for replay</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 15: Building RPS Game -->
+        <div class="slide">
+            <div class="slide-title">Chapter 12: Building the RPS Game</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>Learning Objectives:</strong></p>
+                <ul>
+                    <li>Combine all concepts into one project</li>
+                    <li>Build a complete, playable game</li>
+                    <li>Practice debugging and testing</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🎮</span> <strong>Complete Game Code:</strong></p>
+                <div class="code-block">
+import random
+
+def play_rps():
+    choices = ['rock', 'paper', 'scissors']
+    computer = random.choice(choices)
+    player = input('Rock, paper, or scissors? ').lower()
+    
+    if player not in choices:
+        print('Invalid choice!')
+        return
+    
+    print(f'Computer chose: {computer}')
+    
+    if player == computer:
+        print('Tie!')
+    elif (player == 'rock' and computer == 'scissors') or \
+         (player == 'paper' and computer == 'rock') or \
+         (player == 'scissors' and computer == 'paper'):
+        print('You win!')
+    else:
+        print('Computer wins!')
+
+while True:
+    play_rps()
+    if input('Play again? (y/n): ').lower() != 'y':
+        break
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Conclusion -->
+        <div class="slide conclusion-slide">
+            <div class="slide-title">Congratulations! 🎉</div>
+            <div class="slide-subtitle">You've Completed the NFE Python Course!</div>
+            <div class="slide-content">
+                <p><span class="emoji">🎯</span> <strong>What You've Learned:</strong></p>
+                <ul>
+                    <li>✅ What coding is and why it matters</li>
+                    <li>✅ How to write Python programs</li>
+                    <li>✅ Variables, functions, loops, and conditions</li>
+                    <li>✅ How to build a complete game</li>
+                </ul>
+                <br>
+                <p><span class="emoji">🚀</span> <strong>Next Steps:</strong></p>
+                <ul>
+                    <li>Practice with the exercises</li>
+                    <li>Try building your own projects</li>
+                    <li>Explore more Python libraries</li>
+                    <li>Learn about web development</li>
+                    <li>Study data science and AI</li>
+                </ul>
+                <br>
+                <p><span class="emoji">💡</span> <strong>Remember:</strong></p>
+                <ul>
+                    <li>Coding is a skill that improves with practice</li>
+                    <li>Don't be afraid to make mistakes</li>
+                    <li>The Python community is here to help</li>
+                    <li>Keep building and creating!</li>
+                </ul>
+                <br>
+                <p>Thank you for completing the course! <span class="emoji">🌟</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">Slide <span id="current-slide">1</span> of <span id="total-slides">16</span></div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Show current slide
+            slides[index].classList.add('active');
+            
+            // Update slide number
+            document.getElementById('current-slide').textContent = index + 1;
+            document.getElementById('total-slides').textContent = totalSlides;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('next-btn').disabled = index === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html> 
